@@ -1,0 +1,17 @@
+@import 'bootstrap/_functions';
+@import 'bootstrap/_variables';
+@import 'bootstrap/_mixins';
+
+@import 'bootstrap/_utilities';
+
+@import 'bootstrap/_nav';
+@import 'bootstrap/_navbar';
+@import 'variables';
+
+
+
+.loading{
+  background-color: #FF9900;
+  height: 3px;
+  position: absolute;
+}

@@ -1,0 +1,6 @@
+extends: airbnb
+rules:
+  react/prefer-stateless-function: 0
+  react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
+  react/jsx-tag-spacing: 0
+  comma-dangle: 0
