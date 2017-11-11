@@ -4,17 +4,16 @@ import { multiClientMiddleware } from 'redux-axios-middleware';
 export const axiosClients = {
   default: {
     client: axios.create({
-      baseURL: '/api',
+      baseURL: '/',
       responseType: 'json',
     }),
-  },
-  system: {
-    client: axios.create({
-      baseURL: '/system',
-      responseType: 'json',
-    }),
-  },
+  }
 };
+
+export const axiosRequest = requestAction => axiosClients.default.client
+  .request(requestAction.payload.request).then(response => response)
+  .catch(error => console.log('Axios error', error));
+
 
 export const middleware = multiClientMiddleware(axiosClients,
   {

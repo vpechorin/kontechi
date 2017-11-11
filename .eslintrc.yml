@@ -4,3 +4,5 @@ rules:
   react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
   react/jsx-tag-spacing: 0
   comma-dangle: 0
+  max-len: 0
+  no-plusplus: 0

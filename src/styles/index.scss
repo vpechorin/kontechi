@@ -1,17 +1,97 @@
-@import 'bootstrap/_functions';
-@import 'bootstrap/_variables';
-@import 'bootstrap/_mixins';
+$white: #F2F0E6; // Resene Alabaster
+$primary: #333D57; // Resene True Blue
+$secondary: #6CA2BD; // Resene Nauti
+$light: #CEC6B5; // Resene Half Tea
+$dark: #192A41; // Resene Zinzan
 
-@import 'bootstrap/_utilities';
+$enable-gradients: true;
 
-@import 'bootstrap/_nav';
-@import 'bootstrap/_navbar';
-@import 'variables';
+$navbar-dark-color: rgba($white, .5);
+$navbar-dark-hover-color: rgba($white, .75);
+$navbar-dark-active-color: $white;
+$navbar-dark-disabled-color: rgba($white, .25) !default;
 
+$breadcrumb-base-color: #D2412A;
+$breadcrumb-active-color: rgba($breadcrumb-base-color, .5);
+$breadcrumb-bg: transparent;
+$breadcrumb-padding-x: .5rem;
 
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
 
-.loading{
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+@import '~react-responsive-carousel/lib/styles/carousel.css';
+
+.loading {
   background-color: #FF9900;
   height: 3px;
   position: absolute;
+}
+
+.kt-logo {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.5rem;
+  .innerHl {
+    color: $light;
+  }
+}
+
+.kt-page-container {
+  min-height: calc(100vh - 88px - 72px);
+}
+
+.kt-page-content {
+  padding-top: 1.2rem;
+}
+
+.nav-link.active {
+  color: $breadcrumb-base-color;
+}
+
+.breadcrumb-item {
+  a {
+    color: $breadcrumb-base-color;
+
+    @include hover-focus {
+      color: $breadcrumb-active-color;
+    }
+
+    &.disabled {
+      color: rgba($breadcrumb-base-color, .25);
+    }
+  }
+}
+
+.card-columns {
+  @include media-breakpoint-only(xs) {
+    column-count: 1;
+  }
+  @include media-breakpoint-only(sm) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(md) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
 }

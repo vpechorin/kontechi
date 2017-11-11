@@ -1,11 +1,3 @@
-/target
-/.settings
-/.project
-/.springBeans
-/.classpath
-/src/main/resources/git.properties
-/*.ppr
-/*.pid
 /*.iml
 /.gradle
 /dist

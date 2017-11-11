@@ -2,7 +2,29 @@ function getPageByName({ siteName, pageName }) {
   return {
     payload: {
       request: {
-        url: `/browse/sites/${siteName}/pages/${pageName}`,
+        url: `/api/browse/sites/${siteName}/pages/${pageName}`,
+        method: 'get',
+      },
+    },
+  };
+}
+
+function getSiteByName({ siteName }) {
+  return {
+    payload: {
+      request: {
+        url: `/api/browse/sites/${siteName}`,
+        method: 'get',
+      },
+    },
+  };
+}
+
+function getSitePages({ siteName }) {
+  return {
+    payload: {
+      request: {
+        url: `/api/browse/sites/${siteName}/pages`,
         method: 'get',
       },
     },
@@ -11,4 +33,6 @@ function getPageByName({ siteName, pageName }) {
 
 export default {
   getPageByName,
+  getSiteByName,
+  getSitePages
 };

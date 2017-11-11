@@ -1,31 +1,56 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { loadingBarReducer } from 'react-redux-loading-bar';
-import lodash from 'lodash';
-
-
-export function mergePage(pages, page) {
-  const others = lodash.filter(pages, p => p.id !== page.id)
-  return [ ...others, ...[page] ];
-}
+import pageService from '../modules/PageService';
 
 function loadPage(state, action) {
-  console.log("action xxx: ", action)
   return {
     ...state,
   };
 }
 
 function loadPageSuccess(state, action) {
-  console.log("action success xxx: ", action)
+  const pages = { ...state.pages, [action.id]: action };
   return {
     ...state,
-    pages: mergePage(state.pages || [], action)
+    pages
   };
 }
 
 function loadPageFailure(state, action) {
-  console.log("action failure xxx: ", action)
+  return {
+    ...state,
+  };
+}
+
+function loadSiteSuccess(state, action) {
+  return {
+    ...state,
+    site: action
+  };
+}
+
+function loadSiteFailure(state, action) {
+  return {
+    ...state,
+  };
+}
+
+function putPageIfNotExists(pages, page) {
+  if (!pages[page.id]) pages[page.id] = page;
+}
+
+function loadSitePagesSuccess(state, payload) {
+  const pages = state.pages || {};
+  const updatedPages = { ...pages };
+  payload.payload.data.forEach(p => putPageIfNotExists(updatedPages, p));
+  return {
+    ...state,
+    pages: updatedPages
+  };
+}
+
+function loadSitePagesFailure(state, action) {
   return {
     ...state,
   };
@@ -42,9 +67,10 @@ export function initRequest(reducer) {
 unwrapInitRequest.isAxiosRequest = true;
 
 export function unwrapSuccessResponse(reducer) {
-  return (state, { payload: { data: { ...actualData } }, meta: { previousAction: { payload, type, ...params } } }) => {
-    return reducer(state, actualData, params);
-  };
+  return (state, {
+    payload: { data: { ...actualData } },
+    meta: { previousAction: { payload, type, ...params } }
+  }) => reducer(state, actualData, params);
 }
 
 export function unwrapFailureResponse(reducer) {
@@ -53,14 +79,39 @@ export function unwrapFailureResponse(reducer) {
   };
 }
 
+function switchPage(state, action) {
+  if (action.pageName) {
+    return {
+      ...state,
+      activePage: action.pageName
+    };
+  }
+  return { ...state };
+}
+
+function toggleMenu(state, action) {
+  return { ...state, isMenuOpen: state.isMenuOpen ? !state.isMenuOpen : true };
+}
+
+function closeMenu(state, action) {
+  return { ...state, isMenuOpen: false };
+}
+
 const reducers = {
   LOAD_PAGE_REQUEST: initRequest(loadPage),
   LOAD_PAGE_REQUEST_SUCCESS: unwrapSuccessResponse(loadPageSuccess),
   LOAD_PAGE_REQUEST_FAILURE: unwrapFailureResponse(loadPageFailure),
+  LOAD_SITE_REQUEST_SUCCESS: unwrapSuccessResponse(loadSiteSuccess),
+  LOAD_SITE_REQUEST_FAILURE: unwrapSuccessResponse(loadSiteFailure),
+  LOAD_SITE_PAGES_REQUEST_SUCCESS: loadSitePagesSuccess,
+  LOAD_SITE_PAGES_REQUEST_FAILURE: unwrapSuccessResponse(loadSitePagesFailure),
+  SWITCH_PAGE: switchPage,
+  TOGGLE_MENU: toggleMenu,
+  CLOSE_MENU: closeMenu
 };
 
 const initialState = {
-  pages: []
+  pages: {}
 };
 
 function reduce(state = initialState, action) {

@@ -1,6 +1,7 @@
-import { applyMiddleware, createStore } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import { applyMiddleware, createStore, compose } from 'redux';
+import { routerMiddleware, syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
+import thunk from 'redux-thunk';
 import makeRootReducer from './reducers';
 
 import * as http from './http';
@@ -17,7 +18,7 @@ function configureStore(initialState, history) {
   const loadingBar = loadingBarMiddleware({
     promiseTypeSuffixes: ['REQUEST', 'REQUEST_SUCCESS', 'REQUEST_FAILURE'],
   });
-  const middleware = [routerMiddleware(history), http.middleware, loadingBar];
+  const middleware = [routerMiddleware(history), http.middleware, loadingBar, thunk];
 
   /* eslint-disable no-underscore-dangle */
   const composeEnhancers =
@@ -40,11 +41,9 @@ function configureStore(initialState, history) {
   };
 }
 
-export default (initialState = {}, history) => {
-  console.log('configure store, initialState: ', initialState);
-  const store = configureStore(initialState, history);
+export default (initialState = { app: { pages: [] } }, browserHistory) => {
+  const store = configureStore(initialState, browserHistory);
   store.asyncReducers = {};
-  console.log('empty asyncReducers');
 
   // if (module.hot) {
   //   module.hot.accept('./reducers', () => {
