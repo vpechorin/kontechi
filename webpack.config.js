@@ -9,9 +9,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
+    'babel-polyfill',
     './main.js',
     './styles/index.scss'
   ],
@@ -38,8 +36,7 @@ module.exports = {
         collapseWhitespace: false
       },
     }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'common' }),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'commons', filename: 'commons.js', minChunks: 2, children: true }),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
@@ -52,7 +49,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -60,7 +57,7 @@ module.exports = {
               ['env', {
                 useBuiltIns: true,
                 targets: {
-                  browsers: ['last 2 versions', 'safari >= 7', 'android >= 4']
+                  browsers: ['last 2 versions', 'safari >= 8', 'android >= 4', 'ie 10', 'ie 11']
                 }
               }],
               'react',
@@ -96,8 +93,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   }

@@ -19,7 +19,8 @@
     "redux-axios-middleware": "^4.0.0",
     "redux-thunk": "^2.2.0",
     "bootstrap": "^4.0.0-beta",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",

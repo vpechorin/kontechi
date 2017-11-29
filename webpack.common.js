@@ -43,7 +43,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react', 'stage-0'],
+            presets: [
+              ['env', {
+                useBuiltIns: false,
+                targets: {
+                  browsers: ['last 2 versions', 'safari >= 8', 'android >= 4', 'ie 10', 'ie 11']
+                }
+              }],
+              'react',
+              'stage-0'
+            ],
             plugins: [BabelRestSpreadPlugin]
           }
         }
@@ -62,7 +71,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   }
