@@ -1,7 +1,7 @@
 {
   "name": "kontechi",
   "version": "1.0.0",
-  "description": "",
+  "description": "eurothermprefab.co.nz",
   "main": "app.js",
   "dependencies": {
     "axios": "^0.17.0",
