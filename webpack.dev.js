@@ -4,11 +4,8 @@ const merge = require('webpack-merge')
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-  ],
+  mode: 'development',
+  target: 'web',
   devtool: 'inline-source-map',
   devServer: {
     contentBase: [path.join(__dirname, 'dist')],
@@ -28,7 +25,58 @@ module.exports = merge(common, {
     },
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: false,
+              minimize: false,
+              localIdentName: '[local]', // "[name]__[local]___[hash:base64:5]",
+              modules: true
+            }
+          },
+          {
+            loader: 'resolve-url-loader'
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              sourceMap: false,
+              minimize: false,
+              localIdentName: '[local]', // "[name]__[local]___[hash:base64:5]",
+              modules: true
+            }
+          },
+          {
+            loader: 'resolve-url-loader'
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['styles'],
+              sourceMap: true // needed for resolve-url-loader
+            }
+          }
+        ]
+      }
+
+    ]
+  }
 });
 

@@ -59,7 +59,6 @@ class LeafPage extends React.Component {
 
   render() {
 
-    console.log('leaf page render')
     const docs = this.props.page.docs || [];
 
     const docItems = docs.map(d => this.fileDetails(d))

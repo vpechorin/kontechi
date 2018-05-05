@@ -16,12 +16,9 @@ class Page extends React.Component {
   }
 
   render() {
-    console.log('page render')
     if (!this.props.page || !this.props.site) {
       return <Loading/>;
     }
-
-    console.log('page render 2')
 
     const hasChildren = (typeof this.props.children != "undefined" && this.props.children != null && this.props.children.length > 0);
 

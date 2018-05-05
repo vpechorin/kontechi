@@ -22,18 +22,18 @@ function findById(pages, pageId) {
 function getPageParents(pageName, pages) {
   const sourcePage = findByName(pages, pageName);
   if (!sourcePage) return [];
-  console.log(`starting point: ${sourcePage.id}/${sourcePage.name}`);
+  // console.log(`starting point: ${sourcePage.id}/${sourcePage.name}`);
   const parents = [];
   let currentPage = sourcePage;
   let level = 0;
   do {
     const parent = findById(pages, currentPage.parentId);
     if (parent) {
-      console.log(`Found parent ${parent.name} for page: ${currentPage.name}`);
+      // console.log(`Found parent ${parent.name} for page: ${currentPage.name}`);
       parents.push(parent);
       currentPage = parent;
     } else {
-      console.log(`Page ${currentPage.name} is a root page`);
+      // console.log(`Page ${currentPage.name} is a root page`);
       currentPage = undefined;
     }
     level++;

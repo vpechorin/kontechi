@@ -17,7 +17,6 @@ export class App extends React.Component {
   }
 
   render() {
-    console.log('app page render')
     return (
       <div className="container-fluid pl-0 pr-0">
         <Header/>

@@ -14,7 +14,6 @@ function injectReducer({ key, reducer }) {
 }
 
 function configureStore(initialState, history) {
-  console.log('execute configureStore');
   const loadingBar = loadingBarMiddleware({
     promiseTypeSuffixes: ['REQUEST', 'REQUEST_SUCCESS', 'REQUEST_FAILURE'],
   });

@@ -11,7 +11,7 @@ function toThumbDetails(img, site) {
 }
 
 function toImageDetails(img, site) {
-  console.log('toImageDetails', img, site)
+  // console.log('toImageDetails', img, site)
   if (!img) return {};
   if (!site) return {};
   return {
