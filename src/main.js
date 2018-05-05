@@ -6,8 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 
-import './styles/index.scss';
-
 import App from './modules/App';
 import ActionCreator from './app/actionCreators';
 import createStore from './app/createStore';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {EntypoAttachment} from 'react-entypo';
+import {EntypoAttachment} from 'react-entypo-icons';
 import ImageCarousel from './ImageCarousel';
 import { IMGPATH } from '../app/constants';
 

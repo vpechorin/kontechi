@@ -37,7 +37,7 @@ module.exports = merge(common, {
                   autoprefixer: {
                     add: true,
                     remove: true,
-                    browsers: ['last 2 versions', 'safari >= 8', 'android >= 4', 'ie 10', 'ie 11']
+                    browsers: ['last 2 versions', 'safari >= 9', 'ie 11']
                   },
                   discardComments: {
                     removeAll: true
@@ -80,7 +80,7 @@ module.exports = merge(common, {
                   autoprefixer: {
                     add: true,
                     remove: true,
-                    browsers: ['last 2 versions', 'safari >= 8', 'android >= 4', 'ie 10', 'ie 11']
+                    browsers: ['last 2 versions', 'safari >= 9', 'ie 11']
                   },
                   discardComments: {
                     removeAll: true
